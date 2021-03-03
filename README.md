@@ -1,13 +1,35 @@
+# Move-it Next.js
+## Joining health and games
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+You can clone this repository in your Visual Studio Code using HTTPS or SSH. 
+
+Open VS Code, search for Clone Repository on the home screen and paste the address available in "Code", here on Github, and create a folder for the files.
+
+Maybe ask for permission to connect Github to VSCode. 
+
+You'll need [Node.js](https://nodejs.org/en/) in your machine.
+
+First, go to the project folder:
 
 ```bash
+cd <folder_name>
+```
+
+Then, install dependences:
+
+```bash
+npm i 
+# or 
+npm install
+```
+
+Now, you're able to run the development server: 
+```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
