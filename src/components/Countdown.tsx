@@ -48,7 +48,7 @@ export function Countdown() {
                         onClick={startCountdown}>
                             Iniciar ciclo
                         </button>
-                    )};
+                    )}
                 </>
             )}
         </div>
