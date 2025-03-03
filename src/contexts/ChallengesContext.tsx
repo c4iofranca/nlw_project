@@ -42,10 +42,6 @@ export function ChallengesProvider({ children, ...rest } : ChallengesProviderPro
     const experienceToNextLevel = Math.pow((level + 1) * 4, 2)
 
     useEffect(() => {
-        Notification.requestPermission();
-    }, [] )
-
-    useEffect(() => {
         Cookies.set('level', String(level));
         Cookies.set('currentExperience', String(currentExperience));
         Cookies.set('challengesCompleted', String(challengesCompleted));
@@ -68,12 +64,6 @@ export function ChallengesProvider({ children, ...rest } : ChallengesProviderPro
         setActiveChallenge(challenge);
 
         new Audio("/notification.mp3").play();
-
-        if (Notification.permission === 'granted') {
-            new Notification('Novo desafio', {
-                body: `Valendo ${challenge.amount}`,
-            })
-        }
     }
 
     function resetChallenge(){
