@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
     "autoprefixer": "^9.8.8",
     "js-cookie": "^2.2.1",
     "next": "^15.2.0",
