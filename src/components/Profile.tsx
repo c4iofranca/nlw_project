@@ -1,25 +1,28 @@
-import { useContext } from 'react';
-import { ChallengesContext } from '../contexts/ChallengesContext';
-import styles from '../styles/components/Profile.module.css';
+import { useContext } from "react";
+import { ChallengesContext } from "../contexts/ChallengesContext";
+import styles from "../styles/components/Profile.module.css";
+import { UserContext } from "../contexts/UserContext";
 
-type ProfileData = {
-    image: string;
-    name: string
-}
+export function Profile() {
+  const { user } = useContext(UserContext);
+  const { level } = useContext(ChallengesContext);
 
-export function Profile({ image, name }: ProfileData) {
-    const { level } = useContext(ChallengesContext)
+  if (!user) return;
 
-    return (
-        <div className={styles.profileContainer}>
-            <img src={image} alt={name}/>
-            <div>
-                <strong>{name}</strong>
-                <p>
-                    <img src="icons/level.svg" alt="level"/>
-                    Level {level}
-                </p>
-            </div>
-        </div>
-    )
+  const {
+    user_metadata: { avatar_url, full_name },
+  } = user;
+
+  return (
+    <div className={styles.profileContainer}>
+      <img src={avatar_url} alt={full_name} />
+      <div>
+        <strong>{full_name}</strong>
+        <p>
+          <img src="icons/level.svg" alt="level" />
+          Level {level}
+        </p>
+      </div>
+    </div>
+  );
 }

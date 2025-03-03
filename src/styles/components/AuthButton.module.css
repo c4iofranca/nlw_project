@@ -1,0 +1,35 @@
+.button {
+  width: fit-content;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 5px;
+
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  transition: background-color 0.2s;
+}
+
+.login {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.login:not(:disabled):hover {
+    background: var(--blue-dark);
+}
+
+.logout {
+  background: var(--red);
+  color: var(--white);
+}
+
+.logout:not(:disabled):hover {
+    background: var(--red-dark);
+}

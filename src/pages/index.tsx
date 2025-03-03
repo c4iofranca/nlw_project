@@ -10,15 +10,8 @@ import styles from "../styles/pages/Home.module.css";
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
-import {
-  checkIfUserExists,
-  createUserInitialStatistics,
-  loginWithGithub,
-  logout,
-  supabase,
-} from "../data/supabase";
-import { useEffect, useState } from "react";
-import { User } from "@supabase/supabase-js";
+import { AuthButton } from "../components/AuthButton";
+import { UserProvider } from "../contexts/UserContext";
 
 interface HomeProps {
   level: number;
@@ -27,28 +20,6 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-
-      if (error || !data?.user) {
-        return;
-      }
-
-      const userExists = await checkIfUserExists(data.user.id);
-
-      if (!userExists) {
-        await createUserInitialStatistics(data.user.id);
-      }
-
-      setUser(data.user);
-    };
-
-    fetchUser();
-  }, []);
-
   return (
     <ChallengesProvider
       level={props.level}
@@ -60,40 +31,34 @@ export default function Home(props: HomeProps) {
           <title>Início | move.it</title>
         </Head>
 
-        {user ? (
-          <button
-            onClick={() => {
-              logout();
-              setUser(null);
-            }}
-          >
-            Logout
-          </button>
-        ) : (
-          <button onClick={() => loginWithGithub()}>Login</button>
-        )}
+        <div>
+          <div></div>
 
-        <ExperienceBar />
+          <div>
+            <UserProvider>
+              <>
+                <AuthButton />
 
-        <CountdownProvider>
-          <section>
-            <div>
-              {user && user.user_metadata && (
-                <Profile
-                  image={user?.user_metadata?.avatar_url}
-                  name={user?.user_metadata?.full_name}
-                />
-              )}
+                <ExperienceBar />
 
-              <CompletedChallenges />
-              <Countdown />
-            </div>
+                <CountdownProvider>
+                  <section>
+                    <div>
+                      <Profile />
 
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
+                      <CompletedChallenges />
+                      <Countdown />
+                    </div>
+
+                    <div>
+                      <ChallengeBox />
+                    </div>
+                  </section>
+                </CountdownProvider>
+              </>
+            </UserProvider>
+          </div>
+        </div>
       </div>
     </ChallengesProvider>
   );
