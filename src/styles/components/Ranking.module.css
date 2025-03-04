@@ -1,0 +1,15 @@
+.container {
+
+}
+
+.container > div {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.container > div > img {
+    width: 44px;
+    height: 44px;
+    border: 1px solid transparent;
+    border-radius: 55%;
+}

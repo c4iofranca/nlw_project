@@ -12,6 +12,7 @@ import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 import { AuthButton } from "../components/AuthButton";
 import { UserProvider } from "../contexts/UserContext";
+import { Ranking } from "../components/Ranking";
 
 interface HomeProps {
   level: number;
@@ -21,46 +22,50 @@ interface HomeProps {
 
 export default function Home(props: HomeProps) {
   return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.container}>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
-
-        <div>
-          <div></div>
+    <UserProvider>
+      <ChallengesProvider
+        level={props.level}
+        currentExperience={props.currentExperience}
+        challengesCompleted={props.challengesCompleted}
+      >
+        <div className={styles.container}>
+          <Head>
+            <title>Início | move.it</title>
+          </Head>
 
           <div>
-            <UserProvider>
-              <>
-                <AuthButton />
+            <aside>
+              <Ranking />
+            </aside>
 
-                <ExperienceBar />
+            <main>
+              <AuthButton />
 
-                <CountdownProvider>
-                  <section>
-                    <div>
-                      <Profile />
+              <ExperienceBar />
 
-                      <CompletedChallenges />
-                      <Countdown />
-                    </div>
+              <CountdownProvider>
+                <section>
+                  <div>
+                    <Profile />
 
-                    <div>
-                      <ChallengeBox />
-                    </div>
-                  </section>
-                </CountdownProvider>
-              </>
-            </UserProvider>
+                    <CompletedChallenges />
+                    <Countdown />
+                  </div>
+
+                  <div>
+                    <ChallengeBox />
+                  </div>
+                </section>
+              </CountdownProvider>
+            </main>
           </div>
+
+          <footer>
+            <span>Built with <strong>Nextjs</strong>. Deployed with <strong>Vercel</strong>.</span>
+          </footer>
         </div>
-      </div>
-    </ChallengesProvider>
+      </ChallengesProvider>
+    </UserProvider>
   );
 }
 

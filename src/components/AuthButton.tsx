@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import { loginWithGithub, logout } from "../data/supabase";
 import styles from "../styles/components/AuthButton.module.css";
+import { login, logout } from "../data/auth";
 
 export function AuthButton() {
   const { clearUser, user } = useContext(UserContext);
@@ -13,7 +13,7 @@ export function AuthButton() {
 
   if (!user)
     return (
-      <button className={`${styles.button} ${styles.login}`} onClick={() => loginWithGithub()}>
+      <button className={`${styles.button} ${styles.login}`} onClick={() => login()}>
         Login
       </button>
     );

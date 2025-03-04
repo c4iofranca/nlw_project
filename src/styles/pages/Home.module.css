@@ -15,3 +15,16 @@
   gap: 6.25rem;
   align-content: center;
 }
+
+.container > div {
+  display: flex;
+  gap: 3.5rem;
+}
+
+.container > div aside {
+  min-width: fit-content;
+}
+
+.container footer {
+  margin-top: 3.5rem;
+}
